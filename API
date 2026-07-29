@@ -1,0 +1,40 @@
+import javax.swing.*;
+
+public class whats {
+
+    public static void main(String[] args) {
+
+        JFrame janela = new JFrame("spotfye");
+        janela.setSize(350, 250);
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        janela.setLayout(null);
+
+        JTextField txtNumero = new JTextField("");
+        txtNumero.setBounds(20, 20, 290, 30);
+        janela.add(txtNumero);
+
+        JTextArea txtMensagem = new JTextArea("ola, tudo bem?");
+        txtMensagem.setBounds(20, 60, 290, 60);
+        janela.add(txtMensagem);
+
+        JButton btnEnviar = new JButton("enviar para whats web");
+        btnEnviar.setBounds(20, 130, 290, 40);
+        janela.add(btnEnviar);
+
+        btnEnviar.addActionListener(e -> {
+            String numero = txtNumero.getText();
+            String mensagem = txtMensagem.getText().replace(" ", "%20");
+
+            String url = "http://open.spotify.com/intl-pt" ;
+
+            try {
+                Runtime.getRuntime().exec("cmd /c start " + url);
+            } catch (Exception erro) {
+                System.out.println("Erro ao abrir link: " + erro.getMessage());
+            }
+        });
+
+        janela.setLocationRelativeTo(null);
+        janela.setVisible(true);
+    }
+}
