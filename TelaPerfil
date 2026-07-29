@@ -10,25 +10,41 @@ public class TelaPerfil {
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setLayout(null);
 		
-		ImageIcon Imagemofc = new ImageIcon("foto.jpg");
+		ImageIcon Imagemofc = new ImageIcon("foto1.jpg");
 		Image imagemred = Imagemofc.getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
 		JLabel foto = new JLabel (new ImageIcon(imagemred));
 		
 		foto.setBounds(20,20,120,120);
 		j.add(foto);
 
+		JButton btnInsta = new JButton ("Instagram");
+		btnInsta.setBounds(20, 130, 120, 40);
+		j.add(btnInsta);
+		
+		btnInsta.addActionListener(e -> abrirNavegador ("https://www.instagram.com/"));
+		
+		j.setVisible(true);
+		
 		JButton btnWhats = new JButton ("Whatsapp");
-		btnWhats.setBounds(20,160,150,35);
+		btnWhats.setBounds(20,220,120,40);
 		j.add(btnWhats);
 		
-		btnWhats.addActionListener(e -> abrirNavegador ("https://wa.me/5541999998888"));
+		btnWhats.addActionListener(e -> abrirNavegador ("https://web.whatsapp.com/"));
+		
+		j.setVisible(true);
+		
+		JButton btnSpot = new JButton ("Spotify");
+		btnSpot.setBounds(20, 175, 120, 40);
+		j.add(btnSpot);
+		
+		btnSpot.addActionListener(e -> abrirNavegador ("https://open.spotify.com/intl-pt/"));
 		
 		j.setVisible(true);
 	}
 		
 		public static void abrirNavegador(String url) {
 			try {
-				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocoloHandler " + url);
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
 			}catch (Exception e) {
 				System.out.println("Erro ao abrir a URL");
 			}
