@@ -1,0 +1,36 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class TelaPerfil {
+
+	public static void main(String[] args) {
+		
+		JFrame j = new JFrame ("Perfil do Usuário");
+		j.setSize(350,400);
+		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		j.setLayout(null);
+		
+		ImageIcon Imagemofc = new ImageIcon("foto.jpg");
+		Image imagemred = Imagemofc.getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+		JLabel foto = new JLabel (new ImageIcon(imagemred));
+		
+		foto.setBounds(20,20,120,120);
+		j.add(foto);
+
+		JButton btnWhats = new JButton ("Whatsapp");
+		btnWhats.setBounds(20,160,150,35);
+		j.add(btnWhats);
+		
+		btnWhats.addActionListener(e -> abrirNavegador ("https://wa.me/5541999998888"));
+		
+		j.setVisible(true);
+	}
+		
+		public static void abrirNavegador(String url) {
+			try {
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocoloHandler " + url);
+			}catch (Exception e) {
+				System.out.println("Erro ao abrir a URL");
+			}
+		}
+	}
