@@ -1,0 +1,27 @@
+import java.awt.Desktop; // BIBLIOTECA NOVA, GARANTE QUE AO CLICAR VA DIRETO PARA O SITE
+import java.net.URI; // TEXTO SIMPLES PARA TEXTO URL
+import java.net.URLEncoder; // TRANSFORMA A NOSSA LINGUAGEM EM LINGUAGEM DE INTERNET
+import java.nio.charset.StandardCharsets; // FORNECER CONSTANTES PRONTAS PARA CONJUNTOS DE CARACTERES PADRAO MAIS USADOS
+
+
+public class Aul1Whats {
+	public static void main(String[] args) {
+		String nome = "Rafa";
+		String telefone = "41999999999";
+		String texto = "Olá Rafa, seu pedido chegou!";
+		
+		try {
+			String txtForma = URLEncoder.encode(texto, StandardCharsets.UTF_8.name()); //ESSE CÓDIGO CONVERTE O TEXTO PARA UM FORMATO COMPATÍVEL COM URL
+			String linkWhats = "https://wa.me//55" + telefone + "?text=" + txtForma; // EM SEGUIDA, MONTA UM LINK DO WHATSAPP
+			
+			System.out.println("Abrindo whatsapp para " + nome + "...");
+			
+			Desktop.getDesktop().browse(new URI(linkWhats));
+		}catch(Exception e) {
+			System.out.println("Erro ao abrir o link" + e.getMessage());
+			
+		}
+
+	}
+
+}
