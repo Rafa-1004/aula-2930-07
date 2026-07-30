@@ -1,0 +1,61 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
+import javax.swing.*;
+import java.net.URL;
+
+public class JBusca {
+
+	public static void main(String[] args) {
+		JFrame j = new JFrame ("Consulta de CEP simples");
+		j.setSize(400,300);
+		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		j.setLayout(null);
+		
+		JLabel rotuloCEP = new JLabel ("Digite o CEP: ");
+		rotuloCEP.setBounds(20,20,100,25);
+		j.add(rotuloCEP);
+		
+		JTextField campoCEP = new JTextField();
+		campoCEP.setBounds(120,20,150,25);
+		j.add(campoCEP);
+		
+		JButton btnconsu = new JButton ("Consultar");
+		btnconsu.setBounds(120,60,150,30);
+		j.add(btnconsu);
+		
+		JTextArea arearesults = new JTextArea();
+		arearesults.setBounds(20,110,340,130);
+		arearesults.setEditable(false);
+		j.add(arearesults);
+		
+	
+		
+		btnconsu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e ) {
+				String cep = campoCEP.getText();
+				
+				try {
+					String urlString = "https://viacep.com.br/ws/" + cep + "/json/" ;
+					URL url = new URL (urlString);
+					Scanner leiapi = new Scanner (url.openStream());
+					
+					StringBuilder results = new StringBuilder();
+					while(leiapi.hasNextLine()) {
+						results.append(leiapi.nextLine()).append("\n");
+					}
+					leiapi.close();
+					
+					arearesults.setText(results.toString());
+					
+				}catch(Exception ex) {                               
+					arearesults.setText("Erro ao consultar");	
+				}
+				
+			}
+		});
+		j.setVisible(true);
+
+	}
+
+}
